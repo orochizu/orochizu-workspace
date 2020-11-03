@@ -24,18 +24,23 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "blogify-web-app:serve": "nx run blogify-web-app:serve"
   },
   "dependencies": {
     "@theme-ui/presets": "^0.3.0",
+    "apollo-server-micro": "^2.19.0",
+    "axios": "^0.21.0",
     "document-register-element": "1.13.1",
+    "graphql": "^15.4.0",
     "next": "10.0.0",
     "next-compose-plugins": "^2.2.0",
     "next-env": "^1.1.1",
     "next-images": "^1.6.2",
     "next-optimized-images": "^2.6.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "theme-ui": "^0.3.1"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
@@ -54,10 +59,12 @@
     "@nrwl/web": "10.3.1",
     "@nrwl/workspace": "10.3.1",
     "@testing-library/react": "10.4.1",
+    "@types/axios": "^0.14.0",
     "@types/jest": "26.0.8",
     "@types/node": "~8.9.4",
     "@types/react": "16.9.38",
     "@types/react-dom": "16.9.8",
+    "@types/theme-ui": "^0.3.7",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "babel-jest": "26.2.2",
@@ -75,7 +82,8 @@
     "ts-jest": "26.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "~4.0.3"
+    "typescript": "~4.0.3",
+    "webp-loader": "^0.6.0"
   },
   "husky": {
     "hooks": {

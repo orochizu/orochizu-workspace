@@ -1,26 +1,25 @@
 import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
-import './styles.css';
+import { ThemeProvider } from 'theme-ui';
 
-const CustomApp = ({ Component, pageProps }: AppProps) => {
+import theme from '../theme';
+
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
         <title>Welcome to web-app!</title>
       </Head>
-      <div className="app">
-        <header className="flex">
-          <NxLogo width="75" height="50" />
-          <h1>Welcome to web-app!</h1>
-        </header>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className="app">
+          <main>
+            <Component {...pageProps} />
+          </main>
+        </div>
+      </ThemeProvider>
     </>
   );
-};
+}
 
-export default CustomApp;
+export default App;
