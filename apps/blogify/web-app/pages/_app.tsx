@@ -6,6 +6,9 @@ import { AppProps } from 'next/app';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '@orochizu-workspace/ui/theme';
+import Layout from '../components/commons/Layout';
+
+import '../styles.css';
 
 function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -25,7 +28,9 @@ function App(props: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );

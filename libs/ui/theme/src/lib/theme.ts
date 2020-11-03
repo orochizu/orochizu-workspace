@@ -1,32 +1,21 @@
 import { createMuiTheme } from '@material-ui/core';
+import { palette } from './palette';
 
-// {
-//   palette: {
-//     primary: {
-//       main: '',
-//         light: '',
-//         dark: '',
-//         contrastText: '',
-//     },
-//     secondary: {
-//       main: '',
-//         light: '',
-//         dark: '',
-//         contrastText: '',
-//     },
-//     error: {
-//       main: '',
-//         light: '',
-//         dark: '',
-//         contrastText: '',
-//     },
-//     success: {
-//       main: '',
-//         light: '',
-//         dark: '',
-//         contrastText: '',
-//     },
-//   },
-// }
+export const theme = createMuiTheme({
+  palette: {
+    primary: palette.graphite,
+    secondary: palette.rustyBrown,
+  },
+});
 
-export const theme = createMuiTheme();
+theme.overrides = {
+  MuiDrawer: {
+    paper: {
+      width: 'inherit',
+      background: theme.palette.primary.main,
+    },
+    root: {
+      width: 250,
+    },
+  },
+};

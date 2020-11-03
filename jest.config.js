@@ -3,5 +3,6 @@ module.exports = {
     '<rootDir>/apps/blogify/web-app',
     '<rootDir>/libs/ui/theme',
     '<rootDir>/libs/ui/components',
+    '<rootDir>/libs/utils/hooks',
   ],
 };
