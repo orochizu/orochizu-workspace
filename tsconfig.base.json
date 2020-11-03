@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@orochizu-workspace/ui/theme": ["libs/ui/theme/src/index.ts"],
+      "@orochizu-workspace/ui/components": ["libs/ui/components/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

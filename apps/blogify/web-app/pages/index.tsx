@@ -1,7 +1,8 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 function Index() {
-  return <h1>Hello there</h1>;
+  return <Typography variant="h1">Hello there</Typography>;
 }
 
 export default Index;

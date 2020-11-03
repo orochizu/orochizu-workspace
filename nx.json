@@ -29,6 +29,12 @@
     "blogify-web-app-e2e": {
       "tags": [],
       "implicitDependencies": ["blogify-web-app"]
+    },
+    "ui-theme": {
+      "tags": []
+    },
+    "ui-components": {
+      "tags": []
     }
   }
 }
