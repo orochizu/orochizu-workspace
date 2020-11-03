@@ -22,5 +22,13 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "blogify-web-app": {
+      "tags": []
+    },
+    "blogify-web-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["blogify-web-app"]
+    }
+  }
 }
