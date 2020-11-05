@@ -7,8 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
-import cn from 'classnames';
-
 const useStyles = makeStyles<Theme>((theme) => ({
   grid: {
     flexBasis: 0,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Grid, Box, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';

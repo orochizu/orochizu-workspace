@@ -1,11 +1,19 @@
 import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentInitialProps,
+  DocumentContext,
+} from 'next/document';
 
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { theme } from '@orochizu-workspace/ui/theme';
+import { RenderPageResult } from 'next/dist/next-server/lib/utils';
 
 export default class MyDocument extends Document {
-  render() {
+  public render(): JSX.Element {
     return (
       <Html lang="en">
         <Head>
@@ -24,11 +32,13 @@ export default class MyDocument extends Document {
   }
 }
 
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (
+  ctx: DocumentContext
+): Promise<DocumentInitialProps> => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
-  ctx.renderPage = () =>
+  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
     originalRenderPage({
       enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     });

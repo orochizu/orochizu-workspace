@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Box, Grid, IconButton, Theme } from '@material-ui/core';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import { Grid, IconButton, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   icon: {
@@ -16,7 +15,7 @@ interface Props {
   href: string;
 }
 
-function SidebarFooterButton(props: PropsWithChildren<Props>) {
+function SidebarFooterButton(props: PropsWithChildren<Props>): JSX.Element {
   const styles = useStyles();
   return (
     <Grid container justify="center" item xs={3}>

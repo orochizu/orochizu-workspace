@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/styles';
-import { Theme, Box, Divider, Grid, Typography, Link } from '@material-ui/core';
+import { Theme, Box, Divider, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   text: {
