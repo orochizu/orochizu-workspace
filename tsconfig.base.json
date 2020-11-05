@@ -18,7 +18,9 @@
     "paths": {
       "@orochizu-workspace/ui/theme": ["libs/ui/theme/src/index.ts"],
       "@orochizu-workspace/ui/components": ["libs/ui/components/src/index.ts"],
-      "@orochizu-workspace/utils/hooks": ["libs/utils/hooks/src/index.ts"]
+      "@orochizu-workspace/utils/hooks": ["libs/utils/hooks/src/index.ts"],
+      "@orochizu-workspace/types": ["libs/types/src/index.ts"],
+      "@orochizu-workspace/enums": ["libs/enums/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

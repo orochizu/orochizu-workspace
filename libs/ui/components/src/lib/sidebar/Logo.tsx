@@ -35,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 const logo = 'orochizu@web-dev:~$';
 
-export function Logo() {
+export function Logo(): JSX.Element {
   const styles = useStyles();
   const [text, setText] = useState<string>('');
 

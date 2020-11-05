@@ -2112,10 +2112,30 @@
     "@angular-devkit/schematics" "~10.1.3"
     rxjs "^6.5.4"
 
+"@nrwl/jest@10.3.2":
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-10.3.2.tgz#a39fa7a80f5a2f16a3acff0580f2027476f1baf8"
+  integrity sha512-ivUK6S9IUvHUUs4AEXnWjag7mJXX8z00GPX+P3nHSOFvbD6herMy4a61hI0K3rna9FFaS/TvqAP61B4yPfgRZg==
+  dependencies:
+    "@angular-devkit/architect" "~0.1001.3"
+    "@angular-devkit/core" "~10.1.3"
+    "@angular-devkit/schematics" "~10.1.3"
+    rxjs "^6.5.4"
+
 "@nrwl/linter@10.3.1":
   version "10.3.1"
   resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-10.3.1.tgz#096f4e6fa7ed3ce8c89ee5a3aa13099a23707f30"
   integrity sha512-S9q7dumhIbXBhrWEgQZYMocAXJZXuaQT6d4txW+2lo5jpiZws8i4ci/3aGHOxvmygnN8tigXo+BnQCGt+nwDzw==
+  dependencies:
+    "@angular-devkit/architect" "~0.1001.3"
+    glob "7.1.4"
+    minimatch "3.0.4"
+    tslib "^1.9.3"
+
+"@nrwl/linter@10.3.2":
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-10.3.2.tgz#1bece3d5cb7482ac3c8667f38489ec10447cd83c"
+  integrity sha512-j6d6pfbN4xx4ZZbnWITyRH3ucaxE46vWzI4xKbye1edaUOExJJy8B5HNcs2kgnlId/5En03DqbC4e9Vcem9fWg==
   dependencies:
     "@angular-devkit/architect" "~0.1001.3"
     glob "7.1.4"
@@ -2133,17 +2153,17 @@
     "@svgr/webpack" "^5.4.0"
     url-loader "^3.0.0"
 
-"@nrwl/node@^10.3.1":
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/node/-/node-10.3.1.tgz#adee0c95c8c9bdcc3e6a9d4b0b9d3adaa727f37c"
-  integrity sha512-1avh9aQ993K1w81bN33i1Ig6uFXkCXfNnqWed1yWxlOgu0htx5+hGdg+8mkaRBSif7hk/4bi8B5e/79iMPGntg==
+"@nrwl/node@^10.3.2":
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/node/-/node-10.3.2.tgz#5606f5b324834596760ed9dab8a94dd10db51735"
+  integrity sha512-6NSUyBlSA2Z2P4vfdQJTYp+0zCIIYGtDplfdw4AtMlO7EruWZ9DWds0R14fcTTsB9zZJF/SuFudgDeCPC5zyzA==
   dependencies:
     "@angular-devkit/architect" "~0.1001.3"
     "@angular-devkit/build-webpack" "~0.1001.3"
     "@angular-devkit/core" "~10.1.3"
     "@angular-devkit/schematics" "~10.1.3"
-    "@nrwl/jest" "10.3.1"
-    "@nrwl/linter" "10.3.1"
+    "@nrwl/jest" "10.3.2"
+    "@nrwl/linter" "10.3.2"
     circular-dependency-plugin "5.2.0"
     copy-webpack-plugin "6.0.3"
     fork-ts-checker-webpack-plugin "^3.1.1"

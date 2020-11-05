@@ -4,13 +4,12 @@ import { PropsWithChildren } from 'react';
 import { Sidebar } from '@orochizu-workspace/ui/components';
 import { Box, Container } from '@material-ui/core';
 
-interface Props {}
 
-function Layout(props: PropsWithChildren<Props>) {
+function Layout(props: PropsWithChildren<unknown>): JSX.Element {
   const { children } = props;
   return (
     <Box display="flex">
-      <Sidebar />
+      <Sidebar paths={[]} />
       <Container>{children}</Container>
     </Box>
   );

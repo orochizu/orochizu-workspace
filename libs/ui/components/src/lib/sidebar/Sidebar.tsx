@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Drawer, Grid, Theme } from '@material-ui/core';
+import { Drawer, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { useWidth } from '@orochizu-workspace/utils/hooks';
-import { makeStyles } from '@material-ui/styles';
+import { NavigationLink } from '@orochizu-workspace/types';
 
 import { Logo } from './Logo';
 import { SidebarButton } from './SidebarButton';
@@ -14,9 +15,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  paths: NavigationLink[];
+}
 
-export function Sidebar(props: Props) {
+export function Sidebar(props: Props): JSX.Element {
+  const { paths } = props;
+
   const width = useWidth();
   const styles = useStyles();
 
@@ -28,9 +33,9 @@ export function Sidebar(props: Props) {
             <Logo />
           </Grid>
           <Grid item container justify="center" direction="column">
-            <SidebarButton href="/">Home</SidebarButton>
-            <SidebarButton href="/blog">Blog</SidebarButton>
-            <SidebarButton href="/about">About me</SidebarButton>
+            {paths.map(({ path, name }) => (
+              <SidebarButton href={path}>{name}</SidebarButton>
+            ))}
           </Grid>
           <Grid item container></Grid>
         </Grid>

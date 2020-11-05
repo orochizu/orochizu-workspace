@@ -4,5 +4,7 @@ module.exports = {
     '<rootDir>/libs/ui/theme',
     '<rootDir>/libs/ui/components',
     '<rootDir>/libs/utils/hooks',
+    '<rootDir>/libs/types',
+    '<rootDir>/libs/enums',
   ],
 };
