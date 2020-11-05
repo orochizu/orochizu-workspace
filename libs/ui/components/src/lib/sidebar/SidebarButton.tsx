@@ -31,10 +31,11 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 interface Props {
   href: string;
+  onClick?: () => void;
 }
 
-export function SidebarButton(props: PropsWithChildren<Props>) {
-  const { href, children } = props;
+export function SidebarButton(props: PropsWithChildren<Props>): JSX.Element {
+  const { href, onClick, children } = props;
   const { grid, anchor, button, label } = useStyles();
 
   const router = useRouter();
@@ -52,6 +53,7 @@ export function SidebarButton(props: PropsWithChildren<Props>) {
               classes={{ label }}
               className={button}
               startIcon={isActive && <KeyboardArrowRightIcon />}
+              onClick={onClick}
               fullWidth
             >
               {children}

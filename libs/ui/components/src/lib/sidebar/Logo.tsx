@@ -51,7 +51,7 @@ export function Logo(): JSX.Element {
       index++;
     }, 50);
 
-    return () => setText('');
+    return (): void => setText('');
   }, []);
 
   return (

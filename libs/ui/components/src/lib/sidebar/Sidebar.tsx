@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { Drawer, Grid } from '@material-ui/core';
+import {
+  AppBar,
+  Drawer,
+  Grid,
+  Hidden,
+  IconButton,
+  Toolbar,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { useWidth } from '@orochizu-workspace/utils/hooks';
+import Menu from '@material-ui/icons/Menu';
+
 import { NavigationLink } from '@orochizu-workspace/types';
 
 import { Logo } from './Logo';
 import { SidebarButton } from './SidebarButton';
+import SidebarFooter from './SidebarFooter';
 
 const useStyles = makeStyles(() => ({
   menu: {
@@ -21,25 +30,68 @@ interface Props {
 
 export function Sidebar(props: Props): JSX.Element {
   const { paths } = props;
-
-  const width = useWidth();
   const styles = useStyles();
+
+  const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
+
+  const handleMenuToggle = useCallback(
+    (): void => setMenuOpen((prev) => !prev),
+    []
+  );
 
   return (
     <>
-      <Drawer variant="permanent">
-        <Grid container justify="space-evenly" className={styles.menu}>
-          <Grid item container>
+      <Hidden smDown>
+        <Drawer variant="permanent">
+          <Grid container justify="space-evenly" className={styles.menu}>
+            <Grid item container>
+              <Logo />
+            </Grid>
+            <Grid item container justify="center" direction="column">
+              {paths.map(({ path, name }) => (
+                <SidebarButton key={name} href={path}>
+                  {name}
+                </SidebarButton>
+              ))}
+            </Grid>
+            <Grid container item>
+              <SidebarFooter />
+            </Grid>
+          </Grid>
+        </Drawer>
+      </Hidden>
+      <Hidden mdUp>
+        <AppBar position="fixed">
+          <Toolbar color="inherit">
+            <IconButton onClick={handleMenuToggle}>
+              <Menu color="secondary" />
+            </IconButton>
             <Logo />
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="temporary"
+          open={isMenuOpen}
+          onClose={handleMenuToggle}
+        >
+          <Grid container justify="space-evenly" className={styles.menu}>
+            <Grid item container justify="center" direction="column">
+              {paths.map(({ path, name }) => (
+                <SidebarButton
+                  key={name}
+                  href={path}
+                  onClick={handleMenuToggle}
+                >
+                  {name}
+                </SidebarButton>
+              ))}
+            </Grid>
+            <Grid container item>
+              <SidebarFooter />
+            </Grid>
           </Grid>
-          <Grid item container justify="center" direction="column">
-            {paths.map(({ path, name }) => (
-              <SidebarButton href={path}>{name}</SidebarButton>
-            ))}
-          </Grid>
-          <Grid item container></Grid>
-        </Grid>
-      </Drawer>
+        </Drawer>
+      </Hidden>
     </>
   );
 }

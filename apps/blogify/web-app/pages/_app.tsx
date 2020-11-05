@@ -10,7 +10,7 @@ import Layout from '../components/commons/Layout';
 
 import '../styles.css';
 
-function App(props: AppProps) {
+function App(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
