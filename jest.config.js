@@ -6,5 +6,8 @@ module.exports = {
     '<rootDir>/libs/utils/hooks',
     '<rootDir>/libs/types',
     '<rootDir>/libs/enums',
+    '<rootDir>/libs/data-access/firebase',
+    '<rootDir>/libs/data-access/firebase/client',
+    '<rootDir>/libs/data-access/firebase/server',
   ],
 };

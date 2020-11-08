@@ -20,7 +20,13 @@
       "@orochizu-workspace/ui/components": ["libs/ui/components/src/index.ts"],
       "@orochizu-workspace/utils/hooks": ["libs/utils/hooks/src/index.ts"],
       "@orochizu-workspace/types": ["libs/types/src/index.ts"],
-      "@orochizu-workspace/enums": ["libs/enums/src/index.ts"]
+      "@orochizu-workspace/enums": ["libs/enums/src/index.ts"],
+      "@orochizu-workspace/data-access/firebase/client": [
+        "libs/data-access/firebase/client/src/index.ts"
+      ],
+      "@orochizu-workspace/data-access/firebase/server": [
+        "libs/data-access/firebase/server/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

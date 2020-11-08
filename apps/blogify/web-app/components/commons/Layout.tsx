@@ -3,6 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { Sidebar } from '@orochizu-workspace/ui/components';
 import { Box, Container, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import SignInFormModal from '../modals/SignInFormModal';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   root: {
@@ -27,6 +28,7 @@ function Layout(props: PropsWithChildren<unknown>): JSX.Element {
         ]}
       />
       <Container className={styles.root}>{children}</Container>
+      <SignInFormModal />
     </Box>
   );
 }

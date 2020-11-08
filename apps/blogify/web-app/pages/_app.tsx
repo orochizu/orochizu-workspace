@@ -5,9 +5,19 @@ import { AppProps } from 'next/app';
 
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
+
+import { ApolloProvider } from '@apollo/client';
+
 import { theme } from '@orochizu-workspace/ui/theme';
+import {
+  firebaseInit,
+  FirebaseProvider,
+} from '@orochizu-workspace/data-access/firebase/client';
+
+import client from '../graphql/client';
 import Layout from '../components/commons/Layout';
 
+import config from '../_certs/blogify-firebase-config.json';
 import '../styles.css';
 
 function App(props: AppProps): JSX.Element {
@@ -28,9 +38,13 @@ function App(props: AppProps): JSX.Element {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ApolloProvider client={client}>
+          <FirebaseProvider value={firebaseInit(config)}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </FirebaseProvider>
+        </ApolloProvider>
       </ThemeProvider>
     </>
   );

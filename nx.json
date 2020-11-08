@@ -44,6 +44,12 @@
     },
     "enums": {
       "tags": []
+    },
+    "data-access-firebase-client": {
+      "tags": []
+    },
+    "data-access-firebase-server": {
+      "tags": []
     }
   }
 }
