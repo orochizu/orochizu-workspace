@@ -1,8 +1,10 @@
 import { HttpContext, ServerContext } from '@orochizu-workspace/types';
+import { PrismaClient } from '@prisma/client';
 import { auth } from 'firebase-admin';
 
 export async function createContext(
-  context: HttpContext
+  context: HttpContext,
+  prisma: PrismaClient
 ): Promise<ServerContext> {
   const token = (context.req.headers.authorization as string) || '';
   let user: auth.UserRecord | undefined;
@@ -16,5 +18,5 @@ export async function createContext(
       user = undefined;
     }
   }
-  return { ...context, state: { user } };
+  return { ...context, state: { user }, prisma };
 }

@@ -56,9 +56,6 @@
     },
     "data-access-graphql-auth": {
       "tags": []
-    },
-    "data-access-graphql-types": {
-      "tags": []
     }
   }
 }

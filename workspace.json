@@ -48,6 +48,44 @@
             "jestConfig": "apps/blogify/web-app/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "database-create": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "docker-compose -f ./postgres.yml up &"
+            ],
+            "parallel": false
+          }
+        },
+        "database-delete": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "docker-compose -f ./postgres.yml down"
+            ],
+            "parallel": false
+          }
+        },
+        "prisma-generate": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx prisma generate"
+            ],
+            "cwd": "./prisma",
+            "parallel": false
+          }
+        },
+        "prisma-migrate": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx prisma migrate save --experimental",
+              "npx prisma migrate up --experimental"
+            ],
+            "parallel": false
+          }
         }
       }
     },
@@ -261,27 +299,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/data-access/graphql/auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "data-access-graphql-types": {
-      "root": "libs/data-access/graphql/types",
-      "sourceRoot": "libs/data-access/graphql/types/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/data-access/graphql/types/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/data-access/graphql/types/jest.config.js",
             "passWithNoTests": true
           }
         }

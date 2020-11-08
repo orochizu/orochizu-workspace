@@ -1,6 +1,6 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export interface HttpContext {
-  req: IncomingMessage;
-  res: ServerResponse;
+  req: NextApiRequest;
+  res: NextApiResponse;
 }

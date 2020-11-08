@@ -16,6 +16,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
     color: theme.palette.secondary.contrastText,
   },
   link: {
+    cursor: 'pointer',
     color: theme.palette.secondary.light,
   },
 }));

@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server-micro';
 import { ResolverFn, ResolverParams } from '@orochizu-workspace/types';
 
-function withAuth<TParent, TArgs, TResult>(
+export function withAuth<TParent, TArgs, TResult>(
   resolver: ResolverFn<TResult, TArgs, TParent>
 ) {
   return (...params: ResolverParams<TArgs, TParent>) => {
@@ -14,5 +14,3 @@ function withAuth<TParent, TArgs, TResult>(
     return resolver(...params);
   };
 }
-
-export default withAuth;
