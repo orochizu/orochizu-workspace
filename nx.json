@@ -50,6 +50,15 @@
     },
     "data-access-firebase-server": {
       "tags": []
+    },
+    "data-access-graphql-context": {
+      "tags": []
+    },
+    "data-access-graphql-auth": {
+      "tags": []
+    },
+    "data-access-graphql-types": {
+      "tags": []
     }
   }
 }

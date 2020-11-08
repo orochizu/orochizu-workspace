@@ -9,5 +9,8 @@ module.exports = {
     '<rootDir>/libs/data-access/firebase',
     '<rootDir>/libs/data-access/firebase/client',
     '<rootDir>/libs/data-access/firebase/server',
+    '<rootDir>/libs/data-access/graphql/context',
+    '<rootDir>/libs/data-access/graphql/auth',
+    '<rootDir>/libs/data-access/graphql/types',
   ],
 };

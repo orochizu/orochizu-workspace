@@ -2,6 +2,8 @@ import { ApolloServer } from 'apollo-server-micro';
 
 import admin, { ServiceAccount } from 'firebase-admin';
 
+import { createContext } from '@orochizu-workspace/data-access/graphql/context';
+
 import resolvers from '../../graphql/resolvers';
 import typeDefs from '../../graphql/types';
 
@@ -14,7 +16,11 @@ if (!admin.apps.length) {
   });
 }
 
-const apolloServer = new ApolloServer({ resolvers, typeDefs, context: {} });
+const apolloServer = new ApolloServer({
+  resolvers,
+  typeDefs,
+  context: createContext,
+});
 
 export const config = {
   api: {
