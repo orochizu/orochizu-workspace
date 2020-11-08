@@ -53,7 +53,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "docker-compose -f ./postgres.yml up &"
+              "docker-compose -f ./postgres.yml up"
             ],
             "parallel": false
           }
