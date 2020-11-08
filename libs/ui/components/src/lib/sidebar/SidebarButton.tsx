@@ -32,7 +32,7 @@ interface Props {
   onClick?: () => void;
 }
 
-export function SidebarButton(props: PropsWithChildren<Props>): JSX.Element {
+function SidebarButton(props: PropsWithChildren<Props>): JSX.Element {
   const { href, onClick, children } = props;
   const { grid, anchor, button, label } = useStyles();
 
@@ -62,3 +62,5 @@ export function SidebarButton(props: PropsWithChildren<Props>): JSX.Element {
     </Grid>
   );
 }
+
+export default SidebarButton;

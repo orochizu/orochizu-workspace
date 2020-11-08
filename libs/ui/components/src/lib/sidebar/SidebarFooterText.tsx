@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/styles';
-import { Theme, Box, Divider, Grid, Typography } from '@material-ui/core';
+import { Theme, Box, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   text: {
@@ -24,11 +24,6 @@ function SidebarFooterText(): JSX.Element {
 
   return (
     <Grid container item xs={12}>
-      <Grid item xs={12}>
-        <Box pt={1} pb={1}>
-          <Divider />
-        </Box>
-      </Grid>
       <Grid item xs={12}>
         <Box pt={1} pb={1.5}>
           <Typography

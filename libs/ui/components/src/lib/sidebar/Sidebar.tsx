@@ -14,9 +14,10 @@ import Menu from '@material-ui/icons/Menu';
 
 import { NavigationLink } from '@orochizu-workspace/types';
 
-import { Logo } from './Logo';
-import { SidebarButton } from './SidebarButton';
+import Logo from './Logo';
+import SidebarButton from './SidebarButton';
 import SidebarFooter from './SidebarFooter';
+import firebase from 'firebase';
 
 const useStyles = makeStyles(() => ({
   menu: {
@@ -26,10 +27,13 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
   paths: NavigationLink[];
+  user: firebase.User;
+  onSignIn: () => void;
+  onSingOut: () => void;
 }
 
 export function Sidebar(props: Props): JSX.Element {
-  const { paths } = props;
+  const { paths, user, onSignIn, onSingOut } = props;
   const styles = useStyles();
 
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
@@ -55,7 +59,11 @@ export function Sidebar(props: Props): JSX.Element {
               ))}
             </Grid>
             <Grid container item>
-              <SidebarFooter />
+              <SidebarFooter
+                user={user}
+                onSignIn={onSignIn}
+                onSingOut={onSingOut}
+              />
             </Grid>
           </Grid>
         </Drawer>
@@ -87,7 +95,11 @@ export function Sidebar(props: Props): JSX.Element {
               ))}
             </Grid>
             <Grid container item>
-              <SidebarFooter />
+              <SidebarFooter
+                user={user}
+                onSignIn={onSignIn}
+                onSingOut={onSingOut}
+              />
             </Grid>
           </Grid>
         </Drawer>

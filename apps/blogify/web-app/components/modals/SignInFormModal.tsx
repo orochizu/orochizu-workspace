@@ -1,20 +1,24 @@
 import React from 'react';
 
 import {
+  Theme,
+  Grid,
   Button,
+  Typography,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
-  Typography,
+  useMediaQuery,
 } from '@material-ui/core';
-
-import { FormTextField } from '@orochizu-workspace/ui/components';
-import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/styles';
-import { useFirebase } from '@orochizu-workspace/data-access/firebase/client';
+
+import { useForm } from 'react-hook-form';
 import { useReactiveVar } from '@apollo/client';
+
+import { useFirebase } from '@orochizu-workspace/data-access/firebase/client';
+import { FormTextField } from '@orochizu-workspace/ui/components';
+
 import { isSignInModalOpen } from '../../graphql/client/cache';
 
 interface SignInForm {
@@ -34,7 +38,9 @@ const useStyles = makeStyles(() => ({
 
 function SignInFormModal(): JSX.Element {
   const styles = useStyles();
-
+  const fullScreen = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down('sm')
+  );
   const { auth } = useFirebase();
   const isOpen = useReactiveVar(isSignInModalOpen);
 
@@ -46,7 +52,6 @@ function SignInFormModal(): JSX.Element {
     SignInForm
   >({
     mode: 'onBlur',
-    reValidateMode: 'onChange',
   });
 
   const handleSubmit = async (form: SignInForm): Promise<void> => {
@@ -62,12 +67,16 @@ function SignInFormModal(): JSX.Element {
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose} fullScreen={fullScreen}>
       <DialogTitle disableTypography>
         <Typography variant="h5">Sign In with your credentials</Typography>
       </DialogTitle>
       <form onSubmit={submit(handleSubmit)}>
         <DialogContent dividers>
+          <Typography variant="subtitle1">
+            This section is only for administrators to manage content of
+            application.
+          </Typography>
           <Grid container>
             <FormTextField
               id="email-input"

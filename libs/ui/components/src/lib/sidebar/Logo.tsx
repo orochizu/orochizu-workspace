@@ -35,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 const logo = 'orochizu@web-dev:~$';
 
-export function Logo(): JSX.Element {
+function Logo(): JSX.Element {
   const styles = useStyles();
   const [text, setText] = useState<string>('');
 
@@ -68,3 +68,5 @@ export function Logo(): JSX.Element {
     </Box>
   );
 }
+
+export default Logo;
