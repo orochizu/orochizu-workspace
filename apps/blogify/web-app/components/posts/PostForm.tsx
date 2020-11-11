@@ -1,12 +1,23 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import cn from 'classnames';
-
 import { FormTextField } from '@orochizu-workspace/ui/components';
+import { useMutation } from '@apollo/client';
+import {
+  UPLOAD_FILE,
+  UploadFile,
+} from '../../graphql/client/mutations/upload-file';
+
+import MarkdownIt from 'markdown-it';
+import {
+  CREATE_POST,
+  CreatePost,
+} from '../../graphql/client/mutations/create-post';
+
+const mdParser = new MarkdownIt();
 
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
   ssr: false,
@@ -32,7 +43,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function CreatePostForm() {
+function PostForm() {
   const styles = useStyles();
 
   const { handleSubmit: submit, control, errors, formState } = useForm<
@@ -41,9 +52,27 @@ function CreatePostForm() {
     mode: 'onBlur',
   });
 
-  const handleSubmit = async (form: CreatePostFormType): Promise<void> => {
+  const [uploadFile, { loading: isFileUploadInProgress }] = useMutation<
+    UploadFile
+  >(UPLOAD_FILE);
+
+  const [createPost, { loading: isCreatePostInProgress }] = useMutation<
+    CreatePost
+  >(CREATE_POST);
+
+  const handleImageUpload = async (file: File) => {
     try {
-      console.log(form);
+      const { data } = await uploadFile({ variables: { file } });
+
+      return data.uploadFile.url;
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const handleSubmit = async (input: CreatePostFormType): Promise<void> => {
+    try {
+      await createPost({ variables: { input } });
     } catch (e) {
       console.warn(e);
     }
@@ -100,11 +129,23 @@ function CreatePostForm() {
           size={12}
           isRequired
         />
-        <MdEditor
+        <Controller
           id="post-content"
           name="content"
-          style={{ height: '50vh', width: '100%', margin: 8 }}
-          onImageUpload={async (file: File) => {}}
+          defaultValue=""
+          control={control}
+          rules={{ required: true }}
+          render={({ name, value, onChange, onBlur }) => (
+            <MdEditor
+              name={name}
+              value={value}
+              style={{ height: '50vh', width: '100%', margin: 8 }}
+              renderHTML={(text) => mdParser.render(text)}
+              onImageUpload={handleImageUpload}
+              onChange={({ text }) => onChange(text)}
+              onBlur={onBlur}
+            />
+          )}
         />
       </Grid>
       <Grid container justify="flex-end" className={styles.buttons}>
@@ -114,7 +155,11 @@ function CreatePostForm() {
             variant="contained"
             color="primary"
             className={styles.button}
-            disabled={!formState.isValid}
+            disabled={
+              !formState.isValid ||
+              isFileUploadInProgress ||
+              isCreatePostInProgress
+            }
           >
             Create post
           </Button>
@@ -124,4 +169,4 @@ function CreatePostForm() {
   );
 }
 
-export default CreatePostForm;
+export default PostForm;

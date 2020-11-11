@@ -7,15 +7,61 @@ schema {
 
 type Mutation {
   _: Boolean
+  createPost(input: CreatePostInput!): Post!
+  deletePost(id: ID!): Post!
+  updatePost(id: Int!, input: UpdatePostInput!): Post!
+  uploadFile(file: Upload!): UploadFileResponse!
+}
+
+type Post {
+  author: String
+  content: String
+  createdAt: String
+  description: String
+  id: ID!
+  title: String
+  updatedAd: String
+  url: String
 }
 
 type Query {
   _: Boolean
+  post(url: String!): Post
+  posts(from: Int = 0, input: FilterPostInput!, to: Int = 5): [Post]!
+}
+
+type UploadFileResponse {
+  encoding: String!
+  filename: String!
+  mimetype: String!
+  url: String!
 }
 
 enum CacheControlScope {
   PRIVATE
   PUBLIC
+}
+
+input CreatePostInput {
+  author: String
+  content: String
+  description: String
+  title: String
+  url: String
+}
+
+input FilterPostInput {
+  author: String
+  description: String
+  title: String
+}
+
+input UpdatePostInput {
+  author: String
+  content: String
+  description: String
+  title: String
+  url: String
 }
 
 

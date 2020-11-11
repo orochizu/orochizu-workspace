@@ -7,8 +7,21 @@ const optimizedImages = require('next-optimized-images');
 
 dotenvLoad();
 
-module.exports = withPlugins([
-  env({ publicPrefix: 'NX_PUBLIC_', serverPrefix: 'NX_SERVER_' }),
-  images,
-  optimizedImages,
-]);
+module.exports = withPlugins(
+  [
+    env({ publicPrefix: 'NX_PUBLIC_', serverPrefix: 'NX_SERVER_' }),
+    images,
+    optimizedImages,
+  ],
+  {
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/home',
+          permanent: true,
+        },
+      ];
+    },
+  }
+);

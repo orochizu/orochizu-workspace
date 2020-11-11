@@ -38,7 +38,7 @@ function Layout(props: PropsWithChildren<unknown>): JSX.Element {
       <Sidebar
         user={user}
         paths={[
-          { name: 'Home', path: '/' },
+          { name: 'Home', path: '/home' },
           { name: 'Blog', path: '/blog' },
           { name: 'About me', path: '/about' },
         ]}

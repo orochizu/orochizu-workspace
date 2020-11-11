@@ -33,6 +33,15 @@ export function FormTextField(props: Props): JSX.Element {
     isRequired,
     hasError,
   } = props;
+
+  let autoComplete = '';
+
+  if (type === 'email') {
+    autoComplete = 'email';
+  } else if (type === 'password') {
+    autoComplete = 'password';
+  }
+
   return (
     <Grid item xs={size} className={className}>
       <FormControl fullWidth>
@@ -47,6 +56,7 @@ export function FormTextField(props: Props): JSX.Element {
           variant={variant}
           defaultValue={defaultValue}
           disabled={isDisabled}
+          autoComplete={autoComplete}
           rules={{ required: isRequired }}
         />
       </FormControl>

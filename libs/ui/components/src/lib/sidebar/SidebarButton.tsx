@@ -38,7 +38,7 @@ function SidebarButton(props: PropsWithChildren<Props>): JSX.Element {
 
   const router = useRouter();
 
-  const isActive = router.pathname === href;
+  const isActive = router.pathname.startsWith(href);
 
   return (
     <Grid item xs={12} className={grid}>

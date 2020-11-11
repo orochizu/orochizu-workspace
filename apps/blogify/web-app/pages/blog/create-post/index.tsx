@@ -1,8 +1,8 @@
 import React from 'react';
-import CreatePostForm from '../../../components/posts/CreatePostForm';
+import PostForm from '../../../components/posts/PostForm';
 
 function CreatePost() {
-  return <CreatePostForm />;
+  return <PostForm />;
 }
 
 export default CreatePost;

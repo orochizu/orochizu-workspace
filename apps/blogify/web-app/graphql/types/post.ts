@@ -4,7 +4,7 @@ const postType = gql`
   type Post {
     id: ID!
     createdAt: String
-    updatedAd: String
+    updatedAt: String
     url: String
     author: String
     title: String
