@@ -1,1 +1,2 @@
-@import "../../../node_modules/fontsource-fira-mono/latin.css";
+@import "~fontsource-fira-mono/latin.css";
+@import "~react-markdown-editor-lite/lib/index.css";

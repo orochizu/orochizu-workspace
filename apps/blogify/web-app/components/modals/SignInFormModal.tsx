@@ -21,7 +21,7 @@ import { FormTextField } from '@orochizu-workspace/ui/components';
 
 import { isSignInModalOpen } from '../../graphql/client/cache';
 
-interface SignInForm {
+interface SignInFormType {
   email: string;
   password: string;
 }
@@ -49,12 +49,12 @@ function SignInFormModal(): JSX.Element {
   };
 
   const { handleSubmit: submit, control, errors, formState } = useForm<
-    SignInForm
+    SignInFormType
   >({
     mode: 'onBlur',
   });
 
-  const handleSubmit = async (form: SignInForm): Promise<void> => {
+  const handleSubmit = async (form: SignInFormType): Promise<void> => {
     try {
       await auth().signInWithEmailAndPassword(form.email, form.password);
       const token = await auth().currentUser.getIdToken(true);
@@ -62,7 +62,7 @@ function SignInFormModal(): JSX.Element {
       localStorage.setItem('token', token);
       handleClose();
     } catch (e) {
-      console.log(e);
+      console.warn(e);
     }
   };
 

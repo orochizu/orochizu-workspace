@@ -10,8 +10,12 @@ import firebase from 'firebase';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   root: {
+    paddingTop: 60,
+    paddingBottom: 60,
     [theme.breakpoints.down('sm')]: {
       marginTop: 60,
+      paddingTop: 30,
+      paddingBottom: 30,
     },
   },
 }));
