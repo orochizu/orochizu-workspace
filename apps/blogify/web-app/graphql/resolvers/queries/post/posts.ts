@@ -1,5 +1,6 @@
 import { Post, PostWhereInput } from '@prisma/client';
 import { ServerContext } from '@orochizu-workspace/types';
+import { ApolloError } from '@apollo/client';
 
 interface Args {
   input: PostWhereInput;
@@ -12,7 +13,15 @@ const posts = async (
   { input, from, to }: Args,
   ctx: ServerContext
 ): Promise<Post[]> => {
-  return await ctx.prisma.post.findMany({ where: input, take: to, skip: from });
+  try {
+    return await ctx.prisma.post.findMany({
+      where: input,
+      take: to,
+      skip: from,
+    });
+  } catch (e) {
+    throw new ApolloError({ errorMessage: 'Cannot find posts' });
+  }
 };
 
 export default posts;

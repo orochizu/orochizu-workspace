@@ -1,6 +1,7 @@
 import { Post, PostUpdateInput } from '@prisma/client';
 import { ServerContext } from '@orochizu-workspace/types';
 import { withAuth } from '@orochizu-workspace/data-access/graphql/auth';
+import { ApolloError } from '@apollo/client';
 
 interface Args {
   id: number;
@@ -12,7 +13,11 @@ const updatePost = async (
   { id, input }: Args,
   ctx: ServerContext
 ): Promise<Post> => {
-  return await ctx.prisma.post.update({ data: input, where: { id } });
+  try {
+    return await ctx.prisma.post.update({ data: input, where: { id } });
+  } catch (e) {
+    throw new ApolloError({ errorMessage: 'Cannot update post' });
+  }
 };
 
 export default withAuth(updatePost);

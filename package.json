@@ -26,7 +26,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "blogify-web-app:build": "nx run blogify-web-app:build --prod",
-    "blogify-web-app:serve": "nx run blogify-web-app:serve",
+    "blogify-web-app:serve": "nx run blogify-web-app:serve --port=4201",
     "blogify-web-app:database-create": "nx run blogify-web-app:database-create",
     "blogify-web-app:database-delete": "nx run blogify-web-app:database-delete",
     "blogify-web-app:prisma-generate": "nx run blogify-web-app:prisma-generate",
