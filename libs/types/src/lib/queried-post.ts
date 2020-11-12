@@ -1,8 +1,7 @@
-export interface CreatedPost {
-  id: string;
+export interface QueriedPost {
+  __typename: 'Post';
+  id: number;
   url: string;
-  createdAt: Date;
-  updatedAt: Date;
   title: string;
   author: string;
   content: string;

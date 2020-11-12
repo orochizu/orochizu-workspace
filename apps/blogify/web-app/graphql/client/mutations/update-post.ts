@@ -1,17 +1,18 @@
 import { gql } from '@apollo/client';
 import { MutatedPost, CreatePostInput } from '@orochizu-workspace/types';
 
-export interface CreatePost {
-  createPost: MutatedPost;
+export interface UpdatePost {
+  updatePost: MutatedPost;
 }
 
-export interface CreatePostVariables {
+export interface UpdatePostVariables {
+  id: number;
   input: CreatePostInput;
 }
 
-export const CREATE_POST = gql`
-  mutation CreatePost($input: CreatePostInput!) {
-    createPost(input: $input) {
+export const UPDATE_POST = gql`
+  mutation UpdatePost($id: ID!, $input: UpdatePostInput!) {
+    updatePost(id: $id, input: $input) {
       id
       url
       createdAt

@@ -13,7 +13,7 @@ const deletePost = async (
   ctx: ServerContext
 ): Promise<Post> => {
   try {
-    return await ctx.prisma.post.delete({ where: { id } });
+    return await ctx.prisma.post.delete({ where: { id: Number(id) } });
   } catch (e) {
     throw new ApolloError({ errorMessage: 'Cannot delete post' });
   }

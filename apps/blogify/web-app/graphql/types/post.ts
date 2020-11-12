@@ -35,13 +35,14 @@ const postType = gql`
   }
 
   extend type Query {
-    post(url: String!): Post
+    postById(id: ID!): Post
+    postByUrl(url: String!): Post
     posts(input: FilterPostInput!, from: Int = 0, to: Int = 5): [Post]!
   }
 
   extend type Mutation {
     createPost(input: CreatePostInput!): Post!
-    updatePost(id: Int!, input: UpdatePostInput!): Post!
+    updatePost(id: ID!, input: UpdatePostInput!): Post!
     deletePost(id: ID!): Post!
   }
 `;

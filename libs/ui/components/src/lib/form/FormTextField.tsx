@@ -7,7 +7,6 @@ interface Props {
   id: string;
   name: string;
   type: 'text' | 'email' | 'password';
-  defaultValue: string;
   control: Control;
   size: 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   variant?: 'contained' | 'outlined';
@@ -23,7 +22,6 @@ export function FormTextField(props: Props): JSX.Element {
     id,
     name,
     type,
-    defaultValue,
     control,
     size,
     variant,
@@ -54,7 +52,6 @@ export function FormTextField(props: Props): JSX.Element {
           label={label}
           error={hasError}
           variant={variant}
-          defaultValue={defaultValue}
           disabled={isDisabled}
           autoComplete={autoComplete}
           rules={{ required: isRequired }}

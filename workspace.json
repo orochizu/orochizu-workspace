@@ -52,27 +52,21 @@
         "database-create": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "docker-compose -f ./postgres.yml up"
-            ],
+            "commands": ["docker-compose -f ./postgres.yml up"],
             "parallel": false
           }
         },
         "database-delete": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "docker-compose -f ./postgres.yml down"
-            ],
+            "commands": ["docker-compose -f ./postgres.yml down"],
             "parallel": false
           }
         },
         "prisma-generate": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "npx prisma generate"
-            ],
+            "commands": ["npx prisma generate"],
             "cwd": "./prisma",
             "parallel": false
           }
@@ -299,6 +293,27 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/data-access/graphql/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "data-access-graphql-client": {
+      "root": "libs/data-access/graphql/client",
+      "sourceRoot": "libs/data-access/graphql/client/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/data-access/graphql/client/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data-access/graphql/client/jest.config.js",
             "passWithNoTests": true
           }
         }

@@ -9,7 +9,7 @@ type Mutation {
   _: Boolean
   createPost(input: CreatePostInput!): Post!
   deletePost(id: ID!): Post!
-  updatePost(id: Int!, input: UpdatePostInput!): Post!
+  updatePost(id: ID!, input: UpdatePostInput!): Post!
   uploadFile(file: Upload!): UploadFileResponse!
 }
 
@@ -20,13 +20,14 @@ type Post {
   description: String
   id: ID!
   title: String
-  updatedAd: String
+  updatedAt: String
   url: String
 }
 
 type Query {
   _: Boolean
-  post(url: String!): Post
+  postById(id: ID!): Post
+  postByUrl(url: String!): Post
   posts(from: Int = 0, input: FilterPostInput!, to: Int = 5): [Post]!
 }
 

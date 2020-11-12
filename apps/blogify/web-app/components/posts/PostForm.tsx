@@ -4,18 +4,28 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { FormTextField } from '@orochizu-workspace/ui/components';
 import { useMutation } from '@apollo/client';
+
+import MarkdownIt from 'markdown-it';
+
+import { FormTextField } from '@orochizu-workspace/ui/components';
+import { CreatePostInput, QueriedPost } from '@orochizu-workspace/types';
+
 import {
   UPLOAD_FILE,
   UploadFile,
+  UploadFileVariables,
 } from '../../graphql/client/mutations/upload-file';
-
-import MarkdownIt from 'markdown-it';
 import {
   CREATE_POST,
   CreatePost,
+  CreatePostVariables,
 } from '../../graphql/client/mutations/create-post';
+import {
+  UPDATE_POST,
+  UpdatePost,
+  UpdatePostVariables,
+} from '../../graphql/client/mutations/update-post';
 
 const mdParser = new MarkdownIt();
 
@@ -23,13 +33,13 @@ const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
   ssr: false,
 });
 
-interface CreatePostFormType {
-  url: string;
-  author: string;
-  title: string;
-  content: string;
-  description: string;
-}
+const defaultValues: CreatePostInput = {
+  url: '',
+  author: '',
+  title: '',
+  content: '',
+  description: '',
+};
 
 const useStyles = makeStyles(() => ({
   field: {
@@ -43,22 +53,37 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function PostForm() {
+interface Props {
+  post?: QueriedPost;
+}
+
+function PostForm(props: Props) {
+  const { post } = props;
   const styles = useStyles();
 
+  const isUpdateMode = !!(post && post.id);
+
   const { handleSubmit: submit, control, errors, formState } = useForm<
-    CreatePostFormType
+    CreatePostInput
   >({
     mode: 'onBlur',
+    defaultValues: post ?? defaultValues,
   });
 
   const [uploadFile, { loading: isFileUploadInProgress }] = useMutation<
-    UploadFile
+    UploadFile,
+    UploadFileVariables
   >(UPLOAD_FILE);
 
   const [createPost, { loading: isCreatePostInProgress }] = useMutation<
-    CreatePost
+    CreatePost,
+    CreatePostVariables
   >(CREATE_POST);
+
+  const [updatePost, { loading: isUpdatePostInProgress }] = useMutation<
+    UpdatePost,
+    UpdatePostVariables
+  >(UPDATE_POST);
 
   const handleImageUpload = async (file: File) => {
     try {
@@ -70,9 +95,13 @@ function PostForm() {
     }
   };
 
-  const handleSubmit = async (input: CreatePostFormType): Promise<void> => {
+  const handleSubmit = async (input: CreatePostInput): Promise<void> => {
     try {
-      await createPost({ variables: { input } });
+      if (isUpdateMode) {
+        await updatePost({ variables: { id: post.id, input } });
+      } else {
+        await createPost({ variables: { input } });
+      }
     } catch (e) {
       console.warn(e);
     }
@@ -86,7 +115,6 @@ function PostForm() {
           name="url"
           type="text"
           label="Enter URL that will be used to access post"
-          defaultValue=""
           className={styles.field}
           control={control}
           hasError={!!errors.url}
@@ -98,7 +126,6 @@ function PostForm() {
           name="author"
           type="text"
           label="Enter author name"
-          defaultValue=""
           className={styles.field}
           control={control}
           hasError={!!errors.url}
@@ -110,7 +137,6 @@ function PostForm() {
           name="title"
           type="text"
           label="Enter post title"
-          defaultValue=""
           className={styles.field}
           control={control}
           hasError={!!errors.url}
@@ -122,7 +148,6 @@ function PostForm() {
           name="description"
           type="text"
           label="Enter post description"
-          defaultValue=""
           className={styles.field}
           control={control}
           hasError={!!errors.url}
@@ -132,7 +157,6 @@ function PostForm() {
         <Controller
           id="post-content"
           name="content"
-          defaultValue=""
           control={control}
           rules={{ required: true }}
           render={({ name, value, onChange, onBlur }) => (
@@ -158,10 +182,11 @@ function PostForm() {
             disabled={
               !formState.isValid ||
               isFileUploadInProgress ||
-              isCreatePostInProgress
+              isCreatePostInProgress ||
+              isUpdatePostInProgress
             }
           >
-            Create post
+            {isUpdateMode ? 'Update post' : 'Create post'}
           </Button>
         </Grid>
       </Grid>

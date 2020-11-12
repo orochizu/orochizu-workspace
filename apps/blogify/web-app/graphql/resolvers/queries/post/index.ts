@@ -1,10 +1,12 @@
 import { IResolvers } from 'graphql-tools';
-import post from './post';
+import postByUrl from './post-by-url';
+import postById from './post-by-id';
 import posts from './posts';
 
 const postQueries: IResolvers = {
   Query: {
-    post,
+    postByUrl,
+    postById,
     posts,
   },
 };

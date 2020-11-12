@@ -26,6 +26,11 @@ interface SignInFormType {
   password: string;
 }
 
+const defaultValues: SignInFormType = {
+  email: '',
+  password: '',
+};
+
 const useStyles = makeStyles(() => ({
   field: {
     paddingTop: 8,
@@ -52,6 +57,7 @@ function SignInFormModal(): JSX.Element {
     SignInFormType
   >({
     mode: 'onBlur',
+    defaultValues,
   });
 
   const handleSubmit = async (form: SignInFormType): Promise<void> => {
@@ -83,7 +89,6 @@ function SignInFormModal(): JSX.Element {
               name="email"
               type="email"
               label="Enter your email address"
-              defaultValue=""
               className={styles.field}
               control={control}
               hasError={!!errors.email}
@@ -95,7 +100,6 @@ function SignInFormModal(): JSX.Element {
               name="password"
               type="password"
               label="Enter your password"
-              defaultValue=""
               className={styles.field}
               control={control}
               hasError={!!errors.password}

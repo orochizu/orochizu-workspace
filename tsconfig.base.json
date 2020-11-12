@@ -32,6 +32,9 @@
       ],
       "@orochizu-workspace/data-access/graphql/auth": [
         "libs/data-access/graphql/auth/src/index.ts"
+      ],
+      "@orochizu-workspace/data-access/graphql/client": [
+        "libs/data-access/graphql/client/src/index.ts"
       ]
     }
   },

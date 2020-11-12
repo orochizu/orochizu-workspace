@@ -14,14 +14,15 @@ import {
   FirebaseProvider,
 } from '@orochizu-workspace/data-access/firebase/client';
 
-import client from '../graphql/client';
 import Layout from '../components/commons/Layout';
 
 import config from '../_certs/blogify-firebase-config.json';
 import '../styles.css';
+import { useApollo } from '@orochizu-workspace/data-access/graphql/client';
 
 function App(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;
+  const client = useApollo(pageProps.initialApolloState);
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.

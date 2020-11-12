@@ -3,15 +3,15 @@ import { ServerContext } from '@orochizu-workspace/types';
 import { UserInputError } from 'apollo-server-micro';
 
 interface Args {
-  url: string;
+  id: number;
 }
 
-const post = async (_, { url }: Args, ctx: ServerContext): Promise<Post> => {
+const postById = async (_, { id }: Args, ctx: ServerContext): Promise<Post> => {
   try {
-    return await ctx.prisma.post.findOne({ where: { url } });
+    return await ctx.prisma.post.findOne({ where: { id: Number(id) } });
   } catch (e) {
     throw new UserInputError('Not found');
   }
 };
 
-export default post;
+export default postById;

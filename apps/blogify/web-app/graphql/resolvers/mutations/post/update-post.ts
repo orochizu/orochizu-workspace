@@ -14,8 +14,12 @@ const updatePost = async (
   ctx: ServerContext
 ): Promise<Post> => {
   try {
-    return await ctx.prisma.post.update({ data: input, where: { id } });
+    return await ctx.prisma.post.update({
+      data: input,
+      where: { id: Number(id) },
+    });
   } catch (e) {
+    console.log(e);
     throw new ApolloError({ errorMessage: 'Cannot update post' });
   }
 };
