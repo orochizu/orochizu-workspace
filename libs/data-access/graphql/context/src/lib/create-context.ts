@@ -1,19 +1,19 @@
 import { HttpContext, ServerContext } from '@orochizu-workspace/types';
 import { PrismaClient } from '@prisma/client';
-import { auth } from 'firebase-admin';
+import { firebaseAdmin } from '@orochizu-workspace/data-access/firebase/server';
 
 export async function createContext(
   context: HttpContext,
   prisma: PrismaClient
 ): Promise<ServerContext> {
   const token = (context.req.headers.authorization as string) || '';
-  let user: auth.UserRecord | undefined;
+  let user: firebaseAdmin.auth.UserRecord | undefined;
 
   if (token) {
     try {
-      const { email } = await auth().verifyIdToken(token);
+      const { email } = await firebaseAdmin.auth().verifyIdToken(token);
 
-      user = await auth().getUserByEmail(email);
+      user = await firebaseAdmin.auth().getUserByEmail(email);
     } catch (e) {
       user = undefined;
     }

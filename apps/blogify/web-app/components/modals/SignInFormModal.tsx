@@ -16,10 +16,10 @@ import { makeStyles } from '@material-ui/styles';
 import { useForm } from 'react-hook-form';
 import { useReactiveVar } from '@apollo/client';
 
-import { useFirebase } from '@orochizu-workspace/data-access/firebase/client';
 import { FormTextField } from '@orochizu-workspace/ui/components';
 
 import { isSignInModalOpen } from '../../graphql/client/cache';
+import { useAuth } from '@orochizu-workspace/data-access/firebase/auth';
 
 interface SignInFormType {
   email: string;
@@ -46,7 +46,7 @@ function SignInFormModal(): JSX.Element {
   const fullScreen = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down('sm')
   );
-  const { auth } = useFirebase();
+  const { handleSignIn } = useAuth();
   const isOpen = useReactiveVar(isSignInModalOpen);
 
   const handleClose = (): void => {
@@ -62,13 +62,10 @@ function SignInFormModal(): JSX.Element {
 
   const handleSubmit = async (form: SignInFormType): Promise<void> => {
     try {
-      await auth().signInWithEmailAndPassword(form.email, form.password);
-      const token = await auth().currentUser.getIdToken(true);
-
-      localStorage.setItem('token', token);
-      handleClose();
+      await handleSignIn(form.email, form.password);
+      isSignInModalOpen(false);
     } catch (e) {
-      console.warn(e);
+      console.log(e);
     }
   };
 

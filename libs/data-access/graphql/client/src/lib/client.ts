@@ -3,14 +3,15 @@ import { ApolloClient, from, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { setContext } from '@apollo/client/link/context';
 import merge from 'deepmerge';
+import nookies from 'nookies';
+import { environment } from '@orochizu-workspace/environment';
 
 let apolloClient: ApolloClient<unknown> = null;
 
-const httpLink = createUploadLink({ uri: 'http://localhost:4201/api/graphql' });
+const httpLink = createUploadLink({ uri: environment.api });
 
 const authLink = setContext((_, { headers }) => {
-  const token =
-    typeof window === 'undefined' ? '' : localStorage.getItem('token');
+  const token = nookies.get(undefined, environment.token);
 
   return {
     headers: {

@@ -9,7 +9,7 @@ dotenvLoad();
 
 module.exports = withPlugins(
   [
-    env({ publicPrefix: 'NX_PUBLIC_', serverPrefix: 'NX_SERVER_' }),
+    env({ staticPrefix: 'NX_STATIC_', serverPrefix: 'NX_SERVER_' }),
     images,
     optimizedImages,
   ],

@@ -9,16 +9,12 @@ import { ThemeProvider } from '@material-ui/styles';
 import { ApolloProvider } from '@apollo/client';
 
 import { theme } from '@orochizu-workspace/ui/theme';
-import {
-  firebaseInit,
-  FirebaseProvider,
-} from '@orochizu-workspace/data-access/firebase/client';
+import { useApollo } from '@orochizu-workspace/data-access/graphql/client';
+import { AuthProvider } from '@orochizu-workspace/data-access/firebase/auth';
 
 import Layout from '../components/commons/Layout';
 
-import config from '../_certs/blogify-firebase-config.json';
 import '../styles.css';
-import { useApollo } from '@orochizu-workspace/data-access/graphql/client';
 
 function App(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;
@@ -39,13 +35,13 @@ function App(props: AppProps): JSX.Element {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ApolloProvider client={client}>
-          <FirebaseProvider value={firebaseInit(config)}>
+        <AuthProvider>
+          <ApolloProvider client={client}>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </FirebaseProvider>
-        </ApolloProvider>
+          </ApolloProvider>
+        </AuthProvider>
       </ThemeProvider>
     </>
   );

@@ -1,12 +1,11 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { Sidebar } from '@orochizu-workspace/ui/components';
 import { Box, Container, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import SignInFormModal from '../modals/SignInFormModal';
 import { isSignInModalOpen } from '../../graphql/client/cache';
-import { useFirebase } from '@orochizu-workspace/data-access/firebase/client';
-import firebase from 'firebase';
+import { useAuth } from '@orochizu-workspace/data-access/firebase/auth';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   root: {
@@ -22,16 +21,9 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 function Layout(props: PropsWithChildren<unknown>): JSX.Element {
   const { children } = props;
-
   const styles = useStyles();
 
-  const { auth } = useFirebase();
-
-  const [user, setUser] = useState<firebase.User | null>(auth().currentUser);
-
-  useEffect(() => {
-    return auth().onAuthStateChanged((user) => setUser(user));
-  }, [auth]);
+  const { user, handleSignOut } = useAuth();
 
   return (
     <Box display="flex">
@@ -45,10 +37,7 @@ function Layout(props: PropsWithChildren<unknown>): JSX.Element {
         onSignIn={(): void => {
           isSignInModalOpen(true);
         }}
-        onSingOut={(): void => {
-          localStorage.removeItem('token');
-          auth().signOut();
-        }}
+        onSingOut={handleSignOut}
       />
       <Container className={styles.root}>{children}</Container>
       <SignInFormModal />

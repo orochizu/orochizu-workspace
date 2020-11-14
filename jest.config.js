@@ -13,5 +13,7 @@ module.exports = {
     '<rootDir>/libs/data-access/graphql/auth',
     '<rootDir>/libs/data-access/graphql/types',
     '<rootDir>/libs/data-access/graphql/client',
+    '<rootDir>/libs/environment',
+    '<rootDir>/libs/data-access/firebase/auth',
   ],
 };

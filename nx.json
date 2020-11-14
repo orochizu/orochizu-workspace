@@ -59,6 +59,12 @@
     },
     "data-access-graphql-client": {
       "tags": []
+    },
+    "environment": {
+      "tags": []
+    },
+    "data-access-firebase-auth": {
+      "tags": []
     }
   }
 }
