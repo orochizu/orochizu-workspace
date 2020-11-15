@@ -1,5 +1,4 @@
 import firebaseAdmin, { ServiceAccount } from 'firebase-admin';
-import 'firebase/auth';
 import { environment } from '@orochizu-workspace/environment';
 
 if (!firebaseAdmin.apps.length) {

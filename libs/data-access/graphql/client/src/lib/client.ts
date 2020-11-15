@@ -3,7 +3,7 @@ import { ApolloClient, from, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { setContext } from '@apollo/client/link/context';
 import merge from 'deepmerge';
-import nookies from 'nookies';
+import { parseCookies } from 'nookies';
 import { environment } from '@orochizu-workspace/environment';
 
 let apolloClient: ApolloClient<unknown> = null;
@@ -11,12 +11,11 @@ let apolloClient: ApolloClient<unknown> = null;
 const httpLink = createUploadLink({ uri: environment.api });
 
 const authLink = setContext((_, { headers }) => {
-  const token = nookies.get(undefined, environment.token);
-
+  const { token } = parseCookies();
   return {
     headers: {
       ...headers,
-      authorization: token ? token : '',
+      authorization: token || '',
     },
   };
 });
