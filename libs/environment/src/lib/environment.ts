@@ -1,3 +1,8 @@
+const FIREBASE_PRIVATE_KEY = Buffer.from(
+  process.env.NX_SERVER_FIREBASE_PRIVATE_KEY,
+  'base64'
+).toString();
+
 export const environment = {
   api: process.env.NX_STATIC_API,
   token: process.env.NX_STATIC_TOKEN,
@@ -18,7 +23,7 @@ export const environment = {
       type: process.env.NX_SERVER_FIREBASE_TYPE,
       project_id: process.env.NX_STATIC_FIREBASE_PROJECT_ID,
       private_key_id: process.env.NX_SERVER_FIREBASE_PRIVATE_KEY_ID,
-      private_key: process.env.NX_SERVER_FIREBASE_PRIVATE_KEY,
+      private_key: FIREBASE_PRIVATE_KEY,
       client_email: process.env.NX_SERVER_FIREBASE_CLIENT_EMAIL,
       client_id: process.env.NX_STATIC_FIREBASE_CLIENT_ID,
       auth_uri: process.env.NX_SERVER_FIREBASE_AUTH_URI,
