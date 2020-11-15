@@ -1,5 +1,5 @@
 const FIREBASE_PRIVATE_KEY = Buffer.from(
-  process.env.NX_SERVER_FIREBASE_PRIVATE_KEY,
+  process.env.NX_SERVER_FIREBASE_PRIVATE_KEY ?? '',
   'base64'
 ).toString();
 
