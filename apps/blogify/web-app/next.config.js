@@ -14,6 +14,7 @@ module.exports = withPlugins(
     optimizedImages,
   ],
   {
+    target: 'serverless',
     async redirects() {
       return [
         {
