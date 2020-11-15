@@ -22,19 +22,28 @@ function EditPost({ post }: Props) {
 // noinspection JSUnusedGlobalSymbols
 export const getServerSideProps: GetServerSideProps = authorized(
   async (ctx) => {
-    const client = initializeApollo();
+    try {
+      const client = initializeApollo();
 
-    const post = await client.query<PostById>({
-      query: POST_BY_ID,
-      variables: { id: ctx.params.id },
-    });
+      const post = await client.query<PostById>({
+        query: POST_BY_ID,
+        variables: { id: ctx.params.id },
+      });
 
-    return {
-      props: {
-        post: post.data.postById,
-        initialApolloState: client.cache.extract(),
-      },
-    };
+      return {
+        props: {
+          post: post.data.postById,
+          initialApolloState: client.cache.extract(),
+        },
+      };
+    } catch (e) {
+      ctx.res.writeHead(302, { Location: '/blog/post/manage' });
+      ctx.res.end();
+
+      return {
+        props: {} as never,
+      };
+    }
   }
 );
 
