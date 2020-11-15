@@ -41,3 +41,5 @@ Thumbs.db
 # Environment
 .env
 _certs/.gitkeep
+
+.vercel
