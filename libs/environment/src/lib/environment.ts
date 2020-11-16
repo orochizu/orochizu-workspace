@@ -17,6 +17,7 @@ export const environment = {
     path: process.env.NX_STATIC_PATH,
   },
   firebase: {
+    bucket: process.env.NX_SERVER_FIREBASE_BUCKET,
     database: process.env.NX_STATIC_FIREBASE_DATABASE_URL,
     storage: process.env.NX_SERVER_STORAGE,
     admin: {

@@ -5,8 +5,7 @@ import { v4 as uuid } from 'uuid';
 import { withAuth } from '@orochizu-workspace/data-access/graphql/auth';
 import { Upload, UploadedFile } from '@orochizu-workspace/types';
 import mime from 'mime-types';
-
-const bucketName = process.env.NX_SERVER_BUCKET;
+import { environment } from '@orochizu-workspace/environment';
 
 interface Args {
   file: Promise<Upload>;
@@ -20,7 +19,7 @@ const uploadFile = async (_, args: Args): Promise<UploadedFile> => {
 
   file.createReadStream();
 
-  const bucket = await storage().bucket(bucketName);
+  const bucket = await storage().bucket(environment.firebase.bucket);
   const blob = bucket.file(fileName);
 
   const destination = blob.createWriteStream({
