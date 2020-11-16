@@ -1,10 +1,10 @@
 import { storage } from 'firebase-admin';
 
+import mime from 'mime-types';
 import { v4 as uuid } from 'uuid';
 
 import { withAuth } from '@orochizu-workspace/data-access/graphql/auth';
 import { Upload, UploadedFile } from '@orochizu-workspace/types';
-import mime from 'mime-types';
 import { environment } from '@orochizu-workspace/environment';
 
 interface Args {
